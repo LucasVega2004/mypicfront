@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Button, Form, Image } from 'react-bootstrap';
+import logo from './MyPic.png';
+import './style.css'; // Asegúrate de tener el archivo style.css importado correctamente
+import Login from './components/login';
+import MobileNumber from './components/EmailView';
+import Navbar from './components/Navbar';
+import { Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Layout from './components/Layout';
+import ConfirmEmail from './components/ConfirmEmail';
+import ChoosePassword from './components/ChoosePassword';
+import Registro from './components/Registro';
+import EmailView from './components/EmailView';
+import { Router } from 'react-router-dom';
+import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import Inicio from './components/Inicio';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={isAuthenticated ? <Layout /> : <Navigate to="/login" />}
+      />
+      <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+      <Route path="/register" element={<Registro />} />
+      <Route path="/inicio" element={<Layout />} />
+
+    </Routes>
   );
 }
 
